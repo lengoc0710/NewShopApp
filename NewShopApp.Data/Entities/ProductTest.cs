@@ -6,7 +6,7 @@ using System.Text;
 
 namespace NewShopApp.Data.Entities
 {
-    [Table("ProdectTest")]
+    //[Table("ProdectTest")]
     public class ProductTest
     {
         public int ID { set; get; }
@@ -17,7 +17,7 @@ namespace NewShopApp.Data.Entities
         public DateTime DateCreated { set; get; }
 
         public bool? IsFeatured { get; set; }
-        [Required]
+        //[Required]
         public string SeoAllias { get; set; }
 
         public List<ProductInCategory> ProductInCategories { get; set; }

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NewShopApp.Data.Configuration
+namespace NewShopApp.Data.Configurations
 {
     public class LanguageConfiguration : IEntityTypeConfiguration<Language>
     {

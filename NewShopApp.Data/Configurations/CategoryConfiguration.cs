@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NewShopApp.Data.Configuration
+namespace NewShopApp.Data.Configurations
 {
     class CategoryConfiguration : IEntityTypeConfiguration<CategoryTest>
     {

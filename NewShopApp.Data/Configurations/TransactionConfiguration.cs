@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace SolutionTest2.Data.Configurations
+namespace NewShopApp.Data.Configurations
 {
     public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
     {
@@ -18,7 +18,7 @@ namespace SolutionTest2.Data.Configurations
 
             builder.Property(x => x.Id).UseIdentityColumn();
 
-          //  builder.HasOne(x => x.AppUser).WithMany(x => x.Transactions).HasForeignKey(x => x.UserId);
+           builder.HasOne(x => x.AppUser).WithMany(x => x.Transactions).HasForeignKey(x => x.UserId);
         }
     }
 }

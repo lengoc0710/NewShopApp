@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SolutionTest2.Data.Configurations
+namespace NewShopApp.Data.Configurations
 {
 
     public class OrderConfiguration : IEntityTypeConfiguration<Order>
@@ -21,7 +21,7 @@ namespace SolutionTest2.Data.Configurations
             builder.Property(x => x.ShipAddress).IsRequired().IsUnicode(false).HasMaxLength(55);
             builder.Property(x => x.ShipName).IsRequired().IsUnicode(false).HasMaxLength(55);
             builder.Property(x => x.ShipPhoneNumber).IsRequired().IsUnicode(false).HasMaxLength(55);
-           // builder.HasOne(x => x.AppUser).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
+           builder.HasOne(x => x.AppUser).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
         }
     }
 }

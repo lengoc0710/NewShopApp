@@ -9,7 +9,7 @@ namespace NewShopApp.Data.Entities
     {
         public int ID { set; get; }
         public int SortOrder { set; get; }
-        public int OnHome { set; get; }
+        public bool OnHome { set; get; }
         public int? ParentID { set; get; }
         public Status Status { set; get; }
       public List<ProductInCategory> ProductInCategories { get; set; }
