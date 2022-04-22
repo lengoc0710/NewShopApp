@@ -1,7 +1,9 @@
 ﻿
 //using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NewShopApp.Data.Configuration;
 using NewShopApp.Data.Entities;
+using SolutionTest2.Data.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,21 +19,22 @@ namespace SolutionTest2.Data.EntityFramework
         public NewShopAppDbContext(DbContextOptions options) : base(options)
         {
         }
-       //protected override void OnModelCreating(ModelBuilder modelBuilder)
-       // {
-       //     modelBuilder.ApplyConfiguration(new ProductConfiguration());
-       //     modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
-       //     modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-       //     modelBuilder.ApplyConfiguration(new ProductInCategoryConfiguration());
-       //     modelBuilder.ApplyConfiguration(new OrderConfiguration());
-       //     modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
-       //     modelBuilder.ApplyConfiguration(new CartConfiguration());
-       //     modelBuilder.ApplyConfiguration(new PromotionConfiguration());
-       //     modelBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
-       //     modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
-       //     modelBuilder.ApplyConfiguration(new ContactConfiguration());
-       //     modelBuilder.ApplyConfiguration(new LanguageConfiguration());
-       //     modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductInCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new CartConfiguration());
+            modelBuilder.ApplyConfiguration(new PromotionConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactConfiguration());
+            modelBuilder.ApplyConfiguration(new LanguageConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+
             //modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             //modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             //modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
@@ -47,7 +50,8 @@ namespace SolutionTest2.Data.EntityFramework
 
             // base.OnModelCreating(modelBuilder); add-migration AspNetCoreIdentityData
             //add own configuration
-        //}
+            //}
+        }
 
         public DbSet<ProductTest> Products { get; set; }
         public DbSet<CategoryTest> Categories { get; set; }

@@ -1,0 +1,20 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using NewShopApp.Data.Entities;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace NewShopApp.Data.Configuration
+{
+    class OrderDetailConfiguration : IEntityTypeConfiguration<OrderDetail>
+    {
+        public void Configure(EntityTypeBuilder<OrderDetail> builder)
+        {
+            builder.ToTable("OrderDetails");
+            builder.HasKey(x => new { x.OrderId, x.ProductId });
+            builder.HasOne(x => x.Order).WithMany(x => x.OrderDetails).HasForeignKey(x => x.OrderId);
+            builder.HasOne(x => x.ProductTest).WithMany(x => x.OrderDetails).HasForeignKey(x => x.ProductTest);
+        }
+    }
+}
