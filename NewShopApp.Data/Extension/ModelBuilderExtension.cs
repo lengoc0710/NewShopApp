@@ -51,15 +51,66 @@ namespace NewShopApp.Data.Extensions
                    //}
                    //}
 
-               }
-               );
+               },
+                new CategoryTest()
+                {
+                    ID = 3,
+                    OnHome = true,
+                    ParentID = null,
+                    SortOrder = 3,
+                    Status = Status.Active,
+                    //  CategoryTranslations = new List<CategoryTranslation>()
+
+                    //    new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Áo nữ", LanguageId = "vi", SeoAlias = "ao-nu", SeoDescription = "Sản phẩm áo thời trang nữ", SeoTitle = "Sản phẩm áo thời trang women" },
+                    //    new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Women Shirt", LanguageId = "en", SeoAlias = "women-shirt", SeoDescription = "The shirt products for women", SeoTitle = "The shirt products for women" }
+                    //}
+                    //}
+
+                },
+                 new CategoryTest()
+                 {
+                     ID = 4,
+                     OnHome = true,
+                     ParentID = null,
+                     SortOrder = 4,
+                     Status = Status.Active,
+                     //  CategoryTranslations = new List<CategoryTranslation>()
+
+                     //    new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Áo nữ", LanguageId = "vi", SeoAlias = "ao-nu", SeoDescription = "Sản phẩm áo thời trang nữ", SeoTitle = "Sản phẩm áo thời trang women" },
+                     //    new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Women Shirt", LanguageId = "en", SeoAlias = "women-shirt", SeoDescription = "The shirt products for women", SeoTitle = "The shirt products for women" }
+                     //}
+                     //}
+
+                 },
+                   new CategoryTest()
+                   {
+                       ID = 4,
+                       OnHome = true,
+                       ParentID = null,
+                       SortOrder = 4,
+                       Status = Status.Active,
+                       //  CategoryTranslations = new List<CategoryTranslation>()
+
+                       //    new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Áo nữ", LanguageId = "vi", SeoAlias = "ao-nu", SeoDescription = "Sản phẩm áo thời trang nữ", SeoTitle = "Sản phẩm áo thời trang women" },
+                       //    new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Women Shirt", LanguageId = "en", SeoAlias = "women-shirt", SeoDescription = "The shirt products for women", SeoTitle = "The shirt products for women" }
+                       //}
+                       //}
+
+                   }
+           );
 
 
             modelBuilder.Entity<CategoryTranslation>().HasData(
                 new CategoryTranslation() { Id = 1, CategoryId = 1, Name = "Áo nam", LanguageID = "vi", SeoAlias = "ao-nam", SeoDescription = "Sản phẩm áo thời trang nam", SeoTitle = "Sản phẩm áo thời trang nam" },
                 new CategoryTranslation() { Id = 2, CategoryId = 1, Name = "Men Shirt", LanguageID = "en", SeoAlias = "men-shirt", SeoDescription = "The shirt products for men", SeoTitle = "The shirt products for men" },
                 new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Áo nữ", LanguageID = "vi", SeoAlias = "ao-nu", SeoDescription = "Sản phẩm áo thời trang nữ", SeoTitle = "Sản phẩm áo thời trang women" },
-                new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Women Shirt", LanguageID = "en", SeoAlias = "women-shirt", SeoDescription = "The shirt products for women", SeoTitle = "The shirt products for women" }
+                new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Women Shirt", LanguageID = "en", SeoAlias = "women-shirt", SeoDescription = "The shirt products for women", SeoTitle = "The shirt products for women" },
+                new CategoryTranslation() { Id = 5, CategoryId = 3, Name = "Áo phông trẻ em", LanguageID = "vi", SeoAlias = "ao-phong-tre-em", SeoDescription = "Sản phẩm áo cho trẻ em", SeoTitle = "Sản phẩm áo cho trẻ em" },
+                new CategoryTranslation() { Id = 6, CategoryId = 3, Name = "Kids Shirt", LanguageID = "en", SeoAlias = "kids-shirt", SeoDescription = "The shirt products for men", SeoTitle = "The shirt products for men" },
+                new CategoryTranslation() { Id = 7, CategoryId = 4, Name = "Áo khoác nam ", LanguageID = "vi", SeoAlias = "ao-khoac-nam ", SeoDescription = "Sản phẩm mùa đông cho nam ", SeoTitle = "Sản phẩm mùa đông cho nam " },
+                new CategoryTranslation() { Id = 8, CategoryId = 4, Name = "Men Jacket", LanguageID = "en", SeoAlias = "men-jacket", SeoDescription = "The winter outfits for men", SeoTitle = "The winter outfits for men" },
+                new CategoryTranslation() { Id = 9, CategoryId = 5, Name = "Áo khoác nữ ", LanguageID = "vi", SeoAlias = "ao-khoac-nu ", SeoDescription = "Sản phẩm mùa đông cho nữ ", SeoTitle = "Sản phẩm mùa đông cho nữ " },
+                new CategoryTranslation() { Id = 10, CategoryId = 5, Name = "Women Jacket", LanguageID = "en", SeoAlias = "women-jacket", SeoDescription = "The winter outfits for women", SeoTitle = "The winter outfits for women" }
                   );
 
 
