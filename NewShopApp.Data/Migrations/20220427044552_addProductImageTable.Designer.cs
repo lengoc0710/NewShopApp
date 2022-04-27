@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewShopApp.Data.EntityFramework;
 
 namespace NewShopApp.Data.Migrations
 {
     [DbContext(typeof(NewShopAppDbContext))]
-    partial class NewShopAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220427044552_addProductImageTable")]
+    partial class addProductImageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
