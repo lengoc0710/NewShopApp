@@ -1,6 +1,7 @@
-﻿using NewShopApp.Application.Catalog.Product.DataTransferObject;
-using NewShopApp.Application.Catalog.Product.DataTransferObject.Manage;
-using NewShopApp.Application.CommonDataTransferObject;
+﻿
+using Microsoft.AspNetCore.Http;
+using NewShopApp.ViewModels.Catalog.Product;
+using NewShopApp.ViewModels.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,7 +25,14 @@ namespace NewShopApp.Application.Catalog.Product
 
 
      //   Task<List<ProductViewModel>> GetAll();
-        Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
+        Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
+
+        Task<int> AddImage(int productId, List<IFormFile> files );
+
+        Task<int> RemoveImage(int imageId);
+
+        Task<int> UpdateImage(int imageId, string caption, bool isDefault);
+        Task<List<ProductImageViewModel>> GetListImages(int productId);
 
     }
 }
