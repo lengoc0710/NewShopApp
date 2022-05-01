@@ -8,6 +8,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewShopApp.Data", "NewShopApp.Data\NewShopApp.Data.csproj", "{BC9683B0-421B-4E24-840C-E7F1BC976C27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewShopApp.Application", "NewShopApp.Application\NewShopApp.Application.csproj", "{FC8FC9D3-D2F5-4AF3-8167-9D2A52C4A728}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewShopApp.Application", "NewShopApp.Application\NewShopApp.Application.csproj", "{FC8FC9D3-D2F5-4AF3-8167-9D2A52C4A728}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewShopApp.Ultities", "NewShopApp.Ultities\NewShopApp.Ultities.csproj", "{6DDE476C-DDE3-48EB-BC79-D7A2D37784C0}"
 EndProject
