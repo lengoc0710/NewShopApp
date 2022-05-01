@@ -18,6 +18,7 @@ namespace NewShopApp.Data.Configurations
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.OrderDate); //.HasDefaultValue(DateTime.Now);
             builder.Property(x => x.ShipEmail).IsRequired().IsUnicode(false).HasMaxLength(55);
+            //limit charcaters
             builder.Property(x => x.ShipAddress).IsRequired().IsUnicode(false).HasMaxLength(55);
             builder.Property(x => x.ShipName).IsRequired().IsUnicode(false).HasMaxLength(55);
             builder.Property(x => x.ShipPhoneNumber).IsRequired().IsUnicode(false).HasMaxLength(55);

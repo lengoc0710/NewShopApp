@@ -33,7 +33,7 @@ namespace NewShopApp.Data.EntityFramework
             modelBuilder.ApplyConfiguration(new ContactConfiguration());
             modelBuilder.ApplyConfiguration(new LanguageConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductInImageConfiguration());
 
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
@@ -77,7 +77,7 @@ namespace NewShopApp.Data.EntityFramework
 
         public DbSet<Transaction> Transactions { get; set; }
 
-      //  public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<ProductInImage> ProductImages { get; set; }
 
       //  public DbSet<Slide> Slides { get; set; }
     }

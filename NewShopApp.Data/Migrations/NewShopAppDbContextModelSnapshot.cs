@@ -180,7 +180,7 @@ namespace NewShopApp.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "bc38801b-9347-4f80-89d7-0ecfeca49767",
+                            ConcurrencyStamp = "12c24bb3-41d8-413e-9ae0-17b63040caab",
                             DescriptionOfRole = "Administrator role",
                             Name = "AdminOfWeb",
                             NormalizedName = "admin"
@@ -257,7 +257,7 @@ namespace NewShopApp.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c60fbbd-24b7-4c19-96d8-5be64d566ca9",
+                            ConcurrencyStamp = "71db12b9-03f2-4772-b15c-5c82f1ffb9b6",
                             Dob = new DateTime(2000, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "quanngoc2026@gmail@gmail.com",
                             EmailConfirmed = true,
@@ -266,7 +266,7 @@ namespace NewShopApp.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "quanngoc2026@gmail@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGHPNz3Ise3neNsvYJ9J/OWLqjg19YVDIL27rdmTicxOxhP6ImWZcLy2ML95xVq/Bw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENzy03kzla6wndNsrtS3GfiUoeDKMNe3+zo9i70KzHAUTe/j7kEHZtH1dEoAI0TqkQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -578,7 +578,29 @@ namespace NewShopApp.Data.Migrations
                     b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("NewShopApp.Data.Entities.ProductImage", b =>
+            modelBuilder.Entity("NewShopApp.Data.Entities.ProductInCategory", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoryId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductInCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            ProductId = 1
+                        });
+                });
+
+            modelBuilder.Entity("NewShopApp.Data.Entities.ProductInImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -616,28 +638,6 @@ namespace NewShopApp.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("NewShopApp.Data.Entities.ProductInCategory", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoryId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductInCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            ProductId = 1
-                        });
                 });
 
             modelBuilder.Entity("NewShopApp.Data.Entities.ProductTest", b =>
@@ -682,7 +682,7 @@ namespace NewShopApp.Data.Migrations
                         new
                         {
                             ID = 1,
-                            DateCreated = new DateTime(2022, 4, 27, 11, 45, 51, 532, DateTimeKind.Local).AddTicks(2654),
+                            DateCreated = new DateTime(2022, 4, 27, 19, 30, 50, 496, DateTimeKind.Local).AddTicks(5524),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -905,15 +905,6 @@ namespace NewShopApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("NewShopApp.Data.Entities.ProductImage", b =>
-                {
-                    b.HasOne("NewShopApp.Data.Entities.ProductTest", "ProductTest")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("NewShopApp.Data.Entities.ProductInCategory", b =>
                 {
                     b.HasOne("NewShopApp.Data.Entities.CategoryTest", "Category")
@@ -924,6 +915,15 @@ namespace NewShopApp.Data.Migrations
 
                     b.HasOne("NewShopApp.Data.Entities.ProductTest", "Product")
                         .WithMany("ProductInCategories")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("NewShopApp.Data.Entities.ProductInImage", b =>
+                {
+                    b.HasOne("NewShopApp.Data.Entities.ProductTest", "ProductTest")
+                        .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
