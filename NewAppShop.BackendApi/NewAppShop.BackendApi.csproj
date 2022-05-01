@@ -1,14 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App"  />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\NewShopApp.Application\NewShopApp.Application.csproj" />
     <ProjectReference Include="..\NewShopApp.Data\NewShopApp.Data.csproj" />
     <ProjectReference Include="..\NewShopApp.Ultities\NewShopApp.Ultities.csproj" />
     <ProjectReference Include="..\NewShopAppRealViewModels\NewShopApp.ViewModels.csproj" />
