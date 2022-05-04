@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NewShopApp.Application.Catalog.Product;
+using NewShopApp.Application.Common;
 using NewShopApp.Data.EntityFramework;
 using NewShopApp.Ultities.Constant;
 using System;
@@ -30,8 +31,10 @@ namespace NewShopApp.BackendAPI
         {
             services.AddDbContext<NewShopAppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NewShopAppDb")));
-            services.AddScoped<IPublicProductService, PublicProductService>();
-            services.AddControllersWithViews();
+            services.AddTransient<IPublicProductService, PublicProductService>();
+            services.AddTransient<IManageProductService, ManageProductService>();
+            services.AddTransient <IStorageService, FileStorageService>();
+           services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
             {
