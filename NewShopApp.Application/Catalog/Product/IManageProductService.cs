@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Http;
 using NewShopApp.ViewModels.Catalog.Product;
+using NewShopApp.ViewModels.Catalog.ProductImages;
 using NewShopApp.ViewModels.Common;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,13 @@ namespace NewShopApp.Application.Catalog.Product
 {
    public interface IManageProductService
     {
-        Task<int> Craete(ProductCreateRequest request);
+        Task<int> Create(ProductCreateRequest request);
 
         //return Decoder of code for product
         Task<int> Update(ProductUpdateRequest request);
 
         Task<int> Delete(int productId);
+        Task<ProductViewModel> GetById(int productId, string languageID);
 
         Task<bool> UpdatePrice (int productId, decimal newPrice );
         Task<bool> UpdateStock(int productId, int addedQuantity );
@@ -27,11 +29,13 @@ namespace NewShopApp.Application.Catalog.Product
      //   Task<List<ProductViewModel>> GetAll();
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
 
-        Task<int> AddImage(int productId, List<IFormFile> files );
+        Task<int> AddImage(int productId, ProductImageCreateRequest request );
 
         Task<int> RemoveImage(int imageId);
 
-        Task<int> UpdateImage(int imageId, string caption, bool isDefault);
+        Task<int> UpdateImage( int imageId, ProductImageUpdateRequest request);
+
+        Task<ProductImageViewModel> GetImageById(int imageId);
         Task<List<ProductImageViewModel>> GetListImages(int productId);
 
     }

@@ -7,6 +7,7 @@ namespace NewShopApp.ViewModels.Catalog.Product
 {
     public class ProductCreateRequest
     {
+       // public int productId{ get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public decimal OriginalPrice { set; get; }

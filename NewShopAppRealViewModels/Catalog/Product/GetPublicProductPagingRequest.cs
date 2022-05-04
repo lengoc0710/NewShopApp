@@ -8,6 +8,7 @@ namespace NewShopApp.ViewModels.Catalog.Product
 {
   public class GetPublicProductPagingRequest : PagingRequestBase
     {
+        //public string languageID { get; set; }
         public int? CategoryId { get; set; }
        // public string Keyword;
 

@@ -9,7 +9,7 @@ namespace NewShopApp.Application.Catalog.Product
 {
     public interface  IPublicProductService
     {
-        Task <PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);
-        Task<List<ProductViewModel>> GetAll();
+        Task <PagedResult<ProductViewModel>> GetAllByCategoryId(string languageID, GetPublicProductPagingRequest request);
+     //   Task<List<ProductViewModel>> GetAll(string languageID);
     }
 }
