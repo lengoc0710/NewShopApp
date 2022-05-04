@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NewShopApp.Application.Catalog.Product;
 using NewShopApp.Application.Common;
+using NewShopApp.Application.System.User;
+using NewShopApp.Data.Entities;
 using NewShopApp.Data.EntityFramework;
 using NewShopApp.Ultities.Constant;
 using System;
@@ -31,10 +34,17 @@ namespace NewShopApp.BackendAPI
         {
             services.AddDbContext<NewShopAppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NewShopAppDb")));
+            services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<NewShopAppDbContext>()
+                .AddDefaultTokenProviders();
             services.AddTransient<IPublicProductService, PublicProductService>();
             services.AddTransient<IManageProductService, ManageProductService>();
             services.AddTransient <IStorageService, FileStorageService>();
-           services.AddControllersWithViews();
+            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
             {
