@@ -19,37 +19,38 @@ namespace NewShopApp.Application.Catalog.Product
             _context = context;
         }
 
-        public async Task<List<ProductViewModel>> GetAll()
-        {
-            var query = from p in _context.Products
-                        join pt in _context.ProductTranslations on p.ID equals pt.ProductId
-                        join pic in _context.ProductInCategories on p.ID equals pic.ProductId
-                        join c in _context.Categories on pic.ProductId equals c.ID
-                        //   where pt.Name.Contains(request.Keyword)
-                        select new { p, pt, pic };
-            var data = await query.Select(x => new ProductViewModel()
-           {
-               ID = x.p.ID,
-               Name = x.pt.Name,
-               DateCreated = x.p.DateCreated,
-               Description = x.pt.Description,
-               Details = x.pt.Details,
-               LanguageID = x.pt.LanguageID,
-               OriginalPrice = x.p.OriginalPrice,
-               Price = x.p.Price,
-               SeoDescription = x.pt.SeoDescription,
-               SeoAlias = x.pt.SeoAlias,
-               SeoTitle = x.pt.SeoTitle,
-               Stock = x.p.Stock,
-               ViewCount = x.p.ViewCount
+        //public async Task<List<ProductViewModel>> GetAll(string languageID)
+        //{
+        //    var query = from p in _context.Products
+        //                join pt in _context.ProductTranslations on p.ID equals pt.ProductId
+        //                join pic in _context.ProductInCategories on p.ID equals pic.ProductId
+        //                join c in _context.Categories on pic.ProductId equals c.ID
+        //                //   where pt.Name.Contains(request.Keyword)
+        //                where pt.LanguageID == languageID
+        //                select new { p, pt, pic };
+        //    var dataCheck = await query.Select(x => new ProductViewModel()
+        //   {
+        //       ID = x.p.ID,
+        //       Name = x.pt.Name,
+        //       DateCreated = x.p.DateCreated,
+        //       Description = x.pt.Description,
+        //       Details = x.pt.Details,
+        //       LanguageID = x.pt.LanguageID,
+        //       OriginalPrice = x.p.OriginalPrice,
+        //       Price = x.p.Price,
+        //       SeoDescription = x.pt.SeoDescription,
+        //       SeoAlias = x.pt.SeoAlias,
+        //       SeoTitle = x.pt.SeoTitle,
+        //       Stock = x.p.Stock,
+        //       ViewCount = x.p.ViewCount
 
-           }).ToListAsync();
-            return data;
+        //   }).ToListAsync();
+        //    return dataCheck;
 
-        }
+        //}
   
 
-        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageID,GetPublicProductPagingRequest request)
         {
 
             var query = from p in _context.Products
@@ -57,6 +58,7 @@ namespace NewShopApp.Application.Catalog.Product
                         join pic in _context.ProductInCategories on p.ID equals pic.ProductId
                         join c in _context.Categories on pic.ProductId equals c.ID
                         //   where pt.Name.Contains(request.Keyword)
+                        where pt.LanguageID == languageID
                         select new { p, pt, pic };
             //filter 
             //if (!string.IsNullOrEmpty(request.Keyword))
