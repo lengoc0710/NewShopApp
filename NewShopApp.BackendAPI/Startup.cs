@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +17,7 @@ using NewShopApp.Application.System.User;
 using NewShopApp.Data.Entities;
 using NewShopApp.Data.EntityFramework;
 using NewShopApp.Ultities.Constant;
+using NewShopApp.ViewModels.System.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +48,9 @@ namespace NewShopApp.BackendAPI
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IStorageService, FileStorageService>();
-            services.AddControllersWithViews();
+            //services.AddTransient <IValidator<LoginRequest>, LoginRequestValidator>();
+            //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
+            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
             services.AddSwaggerGen(c =>
             {
