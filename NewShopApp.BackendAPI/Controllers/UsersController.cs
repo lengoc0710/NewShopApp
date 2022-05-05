@@ -45,7 +45,7 @@ namespace NewShopApp.BackendAPI.Controllers
             var result = await _userService.Register(request);
             if (!result)
             {
-                return BadRequest("Regoister is failed");
+                return BadRequest("Register is failed");
             }
             return Ok();
             //result

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NewShopApp.Application.Catalog.Product;
 using NewShopApp.ViewModels.Catalog.Product;
@@ -12,6 +13,7 @@ namespace NewShopApp.BackendAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IPublicProductService _publicProductService;
@@ -23,7 +25,7 @@ namespace NewShopApp.BackendAPI.Controllers
             _manageProductService = manageProductService;
         }
 
-        [HttpGet("{productId}/{LangaugeID}")]
+        [HttpGet("{productId}/{LanguageID}")]
         public async Task<IActionResult> GetById(int productId, string languageID)
         {
             var product = await _manageProductService.GetById(productId, languageID);
@@ -38,6 +40,13 @@ namespace NewShopApp.BackendAPI.Controllers
             var products = await _publicProductService.GetAllByCategoryId(languageID, request);
             return Ok(products);
         }
+        //[HttpGet("Public-paging/{languageID}")]
+        ////another URL
+        //public async Task<ActionResult> GetALllPaging(string languageID, [FromQuery] GetPublicProductPagingRequest request) //parameter specific
+        //{
+        //    var products = await _publicProductService.GetAllByCategoryId(languageID, request);
+        //    return Ok(products);
+        //}
         [HttpPost]
         //new post
 
