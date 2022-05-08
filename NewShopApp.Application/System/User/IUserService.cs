@@ -1,4 +1,5 @@
-﻿using NewShopApp.ViewModels.System.User;
+﻿using NewShopApp.ViewModels.Common;
+using NewShopApp.ViewModels.System.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,5 +12,7 @@ namespace NewShopApp.Application.System.User
         Task<string> Authencate(LoginRequest request);
 
         Task<bool> Register(RegisterRequest request);
+
+        Task<PagedResult<UserVm>> GetUserPaging(GetUserPagingRequest request);
     }
 }

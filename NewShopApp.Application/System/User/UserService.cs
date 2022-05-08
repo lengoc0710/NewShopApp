@@ -10,6 +10,9 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
+using NewShopApp.ViewModels.Common;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace NewShopApp.Application.System.User
 {
@@ -56,6 +59,40 @@ namespace NewShopApp.Application.System.User
             return new JwtSecurityTokenHandler().WriteToken(token);
 
         }
+
+        public async Task<PagedResult<UserVm>> GetUserPaging(GetUserPagingRequest request)
+        {
+            var query = _userManager.Users;
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+               
+                query = query.Where(x => x.UserName.Contains(request.Keyword)
+                 || x.PhoneNumber.Contains(request.Keyword));
+            }
+         
+            int totalRow = await query.CountAsync();
+
+            var dataCheck = await query.Skip((request.PageIndex - 1) * request.PageSize).Take(request.PageSize)
+            // select and project 
+            .Select(x => new UserVm()
+            {
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+                UserName = x.UserName,
+                FirstName = x.FirstName,
+                Id = x.Id,
+                LastName = x.LastName
+
+            }).ToListAsync();
+            var pagedResult = new PagedResult<UserVm>()
+            {
+                TotalRecord = totalRow,
+
+                items = dataCheck,
+            };
+            return pagedResult;
+        }
+
 
         public async Task<bool> Register(RegisterRequest request)
         {

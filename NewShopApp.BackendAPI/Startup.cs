@@ -37,13 +37,13 @@ namespace NewShopApp.BackendAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDbContext<NewShopAppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NewShopAppDb")));
             services.AddIdentity<AppUser, AppRole>()
               .AddEntityFrameworkStores<NewShopAppDbContext>()
               .AddDefaultTokenProviders();
-            services.AddTransient<IPublicProductService, PublicProductService>();
-            services.AddTransient<IManageProductService, ManageProductService>();
+            services.AddTransient<IProductService, ProductService>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
