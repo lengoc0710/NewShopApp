@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using NewShopApp.ViewModels.Catalog.Product;
 using NewShopApp.ViewModels.Catalog.ProductImages;
 using NewShopApp.ViewModels.Common;
