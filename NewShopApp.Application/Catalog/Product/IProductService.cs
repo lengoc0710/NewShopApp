@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NewShopApp.Application.Catalog.Product
 {
-   public interface IManageProductService
+   public interface IProductService
     {
         Task<int> Create(ProductCreateRequest request);
 
@@ -38,5 +38,9 @@ namespace NewShopApp.Application.Catalog.Product
         Task<ProductImageViewModel> GetImageById(int imageId);
         Task<List<ProductImageViewModel>> GetListImages(int productId);
 
-    }
+        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageID, GetPublicProductPagingRequest request);
+        //   Task<List<ProductViewModel>> GetAll(string languageID);
+    
+
+}
 }

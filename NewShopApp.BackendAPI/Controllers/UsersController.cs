@@ -33,6 +33,7 @@ namespace NewShopApp.BackendAPI.Controllers
             {
                 return BadRequest("Username or password is incorect");
             }
+     
             return Ok (resultToken);
         }
         [HttpPost("register")]
@@ -50,7 +51,13 @@ namespace NewShopApp.BackendAPI.Controllers
             return Ok();
             //result
         }
-
+        [HttpGet("paging")]
+        //another URL
+        public async Task<ActionResult> GetALllPaging([FromQuery] GetUserPagingRequest request) //parameter specific
+        {
+            var products = await _userService.GetUserPaging(request);
+            return Ok(products);
+        }
 
     }
 }

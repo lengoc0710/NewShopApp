@@ -33,8 +33,11 @@ namespace NewShopAppTest.AdminApp
        {
            options.LoginPath = "/User/Login/";
            options.AccessDeniedPath = "/Account/Forbidden";
-    });
+       });
             services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+            services.AddSession(option => {
+            option.IdleTimeout = TimeSpan.FromMinutes(30);
+        });
             services.AddTransient<IUserApiClient,UserApiClient>();
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -66,6 +69,7 @@ namespace NewShopAppTest.AdminApp
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

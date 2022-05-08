@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
 
 namespace NewShopAppTest.AdminApp.Controllers
 {
@@ -27,9 +28,20 @@ namespace NewShopAppTest.AdminApp.Controllers
             _configuration= configuration;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string keyword ,int pageIndex=1, int pageSize=10)
         {
-            return View();
+            var sessions = HttpContext.Session.GetString("Token");
+            var request = new GetUserPagingRequest
+            {
+                BearerToken = sessions,
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+
+            };
+            var data = await _userApiClient.GetUserPaging(request);
+
+            return View(data);
         }
         [HttpGet]
         public async Task<IActionResult> Login()
@@ -51,6 +63,7 @@ namespace NewShopAppTest.AdminApp.Controllers
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                 IsPersistent = true
             };
+            HttpContext.Session.SetString("Token", token);
             await HttpContext.SignInAsync(
               CookieAuthenticationDefaults.AuthenticationScheme,
               userPrincipal,
