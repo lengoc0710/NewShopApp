@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NewShopApp.ViewModels.Common
 {
-   public  class PagingRequestBase : RequestBase
+   public  class PagingRequestBase 
     {
         public int PageIndex { get; set; }
         public int PageSize { get; set; }

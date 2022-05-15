@@ -29,14 +29,14 @@ namespace NewShopApp.BackendAPI.Controllers
 
             var resultToken = await _userService.Authencate(request);
 
-            if (string.IsNullOrEmpty(resultToken))
+            if (string.IsNullOrEmpty(resultToken.ResultObj))
             {
-                return BadRequest("Username or password is incorect");
+                return BadRequest(resultToken);
             }
      
             return Ok (resultToken);
         }
-        [HttpPost("register")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -44,19 +44,40 @@ namespace NewShopApp.BackendAPI.Controllers
                 return BadRequest(ModelState);
 
             var result = await _userService.Register(request);
-            if (!result)
+            if (!result.IsSuccess)
             {
-                return BadRequest("Register is failed");
+                return BadRequest(result.Message);
             }
             return Ok();
             //result
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id,[FromBody] UserUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.Update(id,request);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+            //result
+        }
         [HttpGet("paging")]
         //another URL
-        public async Task<ActionResult> GetALllPaging([FromQuery] GetUserPagingRequest request) //parameter specific
+        public async Task<ActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request) //parameter specific
         {
             var products = await _userService.GetUserPaging(request);
             return Ok(products);
+        }
+        [HttpGet("{id}")]
+        //another URL
+        public async Task<ActionResult> GetById(Guid id) //parameter specific
+        {
+            var user = await _userService.GetById(id);
+            return Ok(user);
         }
 
     }

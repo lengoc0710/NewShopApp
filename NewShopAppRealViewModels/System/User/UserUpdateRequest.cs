@@ -5,8 +5,10 @@ using System.Text;
 
 namespace NewShopApp.ViewModels.System.User
 {
-   public  class RegisterRequest
+    public class UserUpdateRequest
     {
+        public Guid Id { get; set; }
+
         [Display(Name = "Tên")]
         public string FirstName { get; set; }
 
@@ -18,19 +20,9 @@ namespace NewShopApp.ViewModels.System.User
         public DateTime Dob { get; set; }
 
         [Display(Name = "Hòm thư")]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
-
-        [Display(Name = "Tên đăng nhập")]
-        public string UserName { get; set; }
-        [Display(Name = "Mật khẩu")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-        [Display(Name = "Xác nhận mật khẩu")]
-        [DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
     }
 }

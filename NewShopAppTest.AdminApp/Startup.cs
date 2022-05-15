@@ -12,6 +12,7 @@ using FluentValidation.AspNetCore;
 using NewShopApp.ViewModels.System.User;
 using NewShopAppTest.AdminApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 
 namespace NewShopAppTest.AdminApp
 {
@@ -31,9 +32,10 @@ namespace NewShopAppTest.AdminApp
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
           .AddCookie(options =>
        {
-           options.LoginPath = "/User/Login/";
+           options.LoginPath = "/Login/Index";
            options.AccessDeniedPath = "/Account/Forbidden";
        });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
             services.AddSession(option => {
             option.IdleTimeout = TimeSpan.FromMinutes(30);

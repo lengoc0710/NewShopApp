@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using NewShopApp.ViewModels.Common;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using NewShopApp.ViewModels.Conmon;
 
 namespace NewShopApp.Application.System.User
 {
@@ -22,6 +23,7 @@ namespace NewShopApp.Application.System.User
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly IConfiguration _config;
+        
         public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config)
         {
             _userManager = userManager;
@@ -31,14 +33,14 @@ namespace NewShopApp.Application.System.User
         }
 
      
-        public async Task<string> Authencate(LoginRequest request)
+        public async Task<ApiResult<string>> Authencate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null) return null;              //  throw new NewShopExceptions("Can not find user name");
+            if (user == null) return new ApiErrorResult<string>("Non-existed account"); //  throw new NewShopExceptions("Can not find user name");
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
             if (!result.Succeeded)
             {
-                return null;
+                return new ApiErrorResult<string>("Login information is wrong");
             }
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]
@@ -56,11 +58,35 @@ namespace NewShopApp.Application.System.User
                 claims,
                 expires: DateTime.Now.AddHours(3),
                 signingCredentials: creds);
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            //return new JwtSecurityTokenHandler().WriteToken(token);
+            return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
 
         }
 
-        public async Task<PagedResult<UserVm>> GetUserPaging(GetUserPagingRequest request)
+        public async Task<ApiResult<UserVm>> GetById(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<UserVm>("non-existed");
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            var userVm = new UserVm()
+            {
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                FirstName = user.FirstName,
+                Dob = user.Dob,
+                Id = user.Id,
+                LastName = user.LastName,
+                UserName = user.UserName,
+                Roles = roles
+            };
+            return new ApiSuccessResult<UserVm>(userVm);
+
+        }
+
+        public async Task<ApiResult<PagedResult<UserVm>>> GetUserPaging(GetUserPagingRequest request)
         {
             var query = _userManager.Users;
             if (!string.IsNullOrEmpty(request.Keyword))
@@ -90,13 +116,22 @@ namespace NewShopApp.Application.System.User
 
                 items = dataCheck,
             };
-            return pagedResult;
+            return new ApiSuccessResult<PagedResult<UserVm>>(pagedResult);
         }
 
 
-        public async Task<bool> Register(RegisterRequest request)
+        public async Task<ApiResult<bool>> Register(RegisterRequest request)
         {
-           var  user = new AppUser()
+            var user = await _userManager.FindByNameAsync(request.UserName);
+            if (user != null)
+            {
+                return new ApiErrorResult<bool>("Existed account");
+            }
+            if(await _userManager.FindByEmailAsync(request.Email)!=null)
+            {
+                return new ApiErrorResult<bool>("Existed email");
+            }
+             user = new AppUser()
             {
                 Dob = request.Dob,
                 Email = request.Email,
@@ -108,9 +143,30 @@ namespace NewShopApp.Application.System.User
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
-                return true;
+                return new ApiSuccessResult<bool>();
             }
-            return false;
+            return new ApiErrorResult<bool>("Register is not successful");
+        }
+
+        public async  Task<ApiResult<bool>> Update(Guid id,UserUpdateRequest request)
+        {
+            if (await _userManager.Users.AnyAsync(x => x.Email == request.Email && x.Id != id))
+            {
+                return new ApiErrorResult<bool>("Existed email");
+            }
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            user.Dob = request.Dob;
+            user.Email = request.Email;
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.PhoneNumber = request.PhoneNumber;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<bool>();
+            }
+            return new ApiErrorResult<bool>("Update is failed");
         }
     }
 }
