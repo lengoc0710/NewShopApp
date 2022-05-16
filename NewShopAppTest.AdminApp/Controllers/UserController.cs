@@ -63,13 +63,6 @@ namespace NewShopAppTest.AdminApp.Controllers
                 return View(updateRequest);
             }
             return RedirectToAction("Error", "Home");
-
-        }
-        [HttpGet]
-        public async Task<IActionResult> Details(Guid id)
-        {
-            var result = await _userApiClient.GetById(id);
-            return View(result.ResultObj);
         }
         [HttpGet]
         public IActionResult Create()
@@ -116,7 +109,31 @@ namespace NewShopAppTest.AdminApp.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            return View(new UserDeleteRequest()
+            {
+                Id = id
+            });
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(UserDeleteRequest request)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = await _userApiClient.Delete(request.Id);
+            if (result.IsSuccess)
+            {
+                TempData["result"] = "Deleted Successfully";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", result.Message);
+            return View(request);
+        }
 
 
     }

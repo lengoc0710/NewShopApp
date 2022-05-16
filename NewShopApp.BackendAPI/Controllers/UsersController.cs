@@ -79,6 +79,13 @@ namespace NewShopApp.BackendAPI.Controllers
             var user = await _userService.GetById(id);
             return Ok(user);
         }
+        [HttpDelete("{id}")]
+        //another URL
+        public async Task<ActionResult> Delete(Guid id) //parameter specific
+        {
+            var result = await _userService.Delete(id);
+            return Ok(result);
+        }
 
     }
 }
