@@ -13,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using NewShopApp.ViewModels.Common;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using NewShopApp.ViewModels.Conmon;
 
 namespace NewShopApp.Application.System.User
 {
@@ -112,7 +111,9 @@ namespace NewShopApp.Application.System.User
             }).ToListAsync();
             var pagedResult = new PagedResult<UserVm>()
             {
-                TotalRecord = totalRow,
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize=request.PageSize,
 
                 items = dataCheck,
             };

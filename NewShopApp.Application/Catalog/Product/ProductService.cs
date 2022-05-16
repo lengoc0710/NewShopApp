@@ -102,7 +102,8 @@ namespace NewShopApp.Application.Catalog.Product
             var pagedResult = new PagedResult<ProductViewModel>()
             {
                 TotalRecord = totalRow,
-
+                PageIndex=request.PageIndex,
+                PageSize=request.PageSize,
                 items = dataCheck,
             };
             return pagedResult;
@@ -356,8 +357,9 @@ namespace NewShopApp.Application.Catalog.Product
             }).ToListAsync();
             var pagedResult = new PagedResult<ProductViewModel>()
             {
-                TotalRecord = totalRow,
-
+                TotalRecords = totalRow,
+                PageIndex=request.PageIndex,
+                PageSize=request.PageSize,
                 items = dataCheck,
             };
             return pagedResult;

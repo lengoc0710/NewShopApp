@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NewShopApp.ViewModels.Conmon
+namespace NewShopApp.ViewModels.Common
 {
    public class ApiResult<T>
     {
