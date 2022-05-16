@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using NewShopApp.ViewModels.Common;
-using NewShopApp.ViewModels.Conmon;
 using NewShopApp.ViewModels.System.User;
 using Newtonsoft.Json;
 
