@@ -40,15 +40,21 @@ namespace NewShopAppTest.AdminApp.Controllers
             if (!ModelState.IsValid)
                 return View(ModelState);
 
-            var token = await _userApiClient.Authenticate(request);
 
-            var userPrincipal = this.ValidateToken(token.ResultObj);
+            var result= await _userApiClient.Authenticate(request);
+            if (result.ResultObj == null)
+            {
+                ModelState.AddModelError("", result.Message);
+                return View();
+            }
+
+            var userPrincipal = this.ValidateToken(result.ResultObj);
             var authProperties = new AuthenticationProperties
             {
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                 IsPersistent = false
             };
-            HttpContext.Session.SetString("Token", token.ResultObj);
+            HttpContext.Session.SetString("Token", result.ResultObj);
             await HttpContext.SignInAsync(
               CookieAuthenticationDefaults.AuthenticationScheme,
               userPrincipal,

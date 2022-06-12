@@ -41,6 +41,7 @@ namespace NewShopAppTest.AdminApp
             option.IdleTimeout = TimeSpan.FromMinutes(30);
         });
             services.AddTransient<IUserApiClient,UserApiClient>();
+            services.AddTransient<IRoleApiClient, RoleApiClient>();
             IMvcBuilder builder = services.AddRazorPages();
             var enviroment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 #if DEBUG

@@ -46,9 +46,9 @@ namespace NewShopApp.BackendAPI.Controllers
             var result = await _userService.Register(request);
             if (!result.IsSuccess)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result);
             }
-            return Ok();
+            return Ok(result);
             //result
         }
         [HttpPut("{id}")]
@@ -64,6 +64,19 @@ namespace NewShopApp.BackendAPI.Controllers
             }
             return Ok(result);
             //result
+        }
+        [HttpPut("{id}/roles")]
+        public async Task<IActionResult> RoleAssign(Guid id, [FromBody] RoleAssignRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userService.RoleAssign(id, request);
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
         [HttpGet("paging")]
         //another URL

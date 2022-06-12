@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NewShopApp.Application.Catalog.Product;
 using NewShopApp.Application.Common;
+using NewShopApp.Application.System.Roles;
 using NewShopApp.Application.System.User;
 using NewShopApp.Data.Entities;
 using NewShopApp.Data.EntityFramework;
@@ -48,6 +49,7 @@ namespace NewShopApp.BackendAPI
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IStorageService, FileStorageService>();
+            services.AddTransient<IRoleService,RoleService>();
             //services.AddTransient <IValidator<LoginRequest>, LoginRequestValidator>();
             //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
             services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
