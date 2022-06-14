@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NewShopApp.Ultities\NewShopApp.Ultities.csproj" />
     <ProjectReference Include="..\NewShopAppRealViewModels\NewShopApp.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

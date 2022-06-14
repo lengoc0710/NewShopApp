@@ -87,7 +87,7 @@ namespace NewShopAppTest.AdminApp.Services
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",sessions);
             var reponse = await client.
                 GetAsync($"/api/users/paging?pageIndex={request.PageIndex}&pageSize={request.PageSize}&keyword={ request.Keyword}");
-            var body = await reponse.Content.ReadAsStringAsync(); 
+              var body = await reponse.Content.ReadAsStringAsync(); 
             var users = JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<UserVm>>>(body);
             return users;
         }
