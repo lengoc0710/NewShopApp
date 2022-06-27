@@ -15,14 +15,14 @@ namespace NewShopAppTest.AdminApp.Services
     public class BaseApiClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public BaseApiClient(IHttpClientFactory httpClientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        private readonly IConfiguration _configuration;
+        protected BaseApiClient(IHttpClientFactory httpClientFactory, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         // , IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
-            _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _configuration = configuration;
         }
         protected async Task<TResponse> GetAsync<TResponse>(string url)
         {
@@ -32,8 +32,7 @@ namespace NewShopAppTest.AdminApp.Services
             //post method
             client.BaseAddress = new Uri("https://localhost:5001");
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
-            var reponse = await client.
-                GetAsync(url);
+            var reponse = await client.GetAsync(url);
             var body = await reponse.Content.ReadAsStringAsync();
             if (reponse.IsSuccessStatusCode)
             {

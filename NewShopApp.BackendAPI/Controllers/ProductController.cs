@@ -32,13 +32,24 @@ namespace NewShopApp.BackendAPI.Controllers
                 return BadRequest("Cannot find product");
             return Ok(product);
         }
-        [HttpGet("Public-paging/{languageID}")]
+        //[HttpGet("Public-paging/{languageID}")]
+        ////another URL
+        //public async Task<ActionResult> GetAllPaging(string languageID, [FromQuery] GetPublicProductPagingRequest request) //parameter specific
+        //{
+        //    var products = await _ProductService.GetAllByCategoryId(languageID, request);
+        //    return Ok(products);
+        //}
+
+        [HttpGet("paging")]
         //another URL
-        public async Task<ActionResult> GetALllPaging(string languageID, [FromQuery] GetPublicProductPagingRequest request) //parameter specific
+        public async Task<ActionResult> GetAllPaging([FromQuery] GetManageProductPagingRequest request) //parameter specific
         {
-            var products = await _ProductService.GetAllByCategoryId(languageID, request);
+            var products = await _ProductService.GetPagings(request);
             return Ok(products);
         }
+
+
+
         //[HttpGet("Public-paging/{languageID}")]
         ////another URL
         //public async Task<ActionResult> GetALllPaging(string languageID, [FromQuery] GetPublicProductPagingRequest request) //parameter specific

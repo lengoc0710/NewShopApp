@@ -45,13 +45,13 @@ namespace NewShopApp.BackendAPI
             services.AddIdentity<AppUser, AppRole>()
               .AddEntityFrameworkStores<NewShopAppDbContext>()
               .AddDefaultTokenProviders();
-            services.AddTransient<IProductService, ProductService>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IRoleService,RoleService>();
             services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<IProductService, ProductService>();
             //services.AddTransient <IValidator<LoginRequest>, LoginRequestValidator>();
             //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
             services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());

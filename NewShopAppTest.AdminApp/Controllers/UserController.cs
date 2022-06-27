@@ -33,8 +33,8 @@ namespace NewShopAppTest.AdminApp.Controllers
 
         public async Task<IActionResult> Index(string keyword ,int pageIndex=1, int pageSize=1)
         {
-            var sessions = HttpContext.Session.GetString("Token");
-            var request = new GetUserPagingRequest
+            //var sessions = HttpContext.Session.GetString("Token");
+            var request = new GetUserPagingRequest ()
             {
            
                 Keyword = keyword,
