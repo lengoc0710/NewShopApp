@@ -1,4 +1,5 @@
-﻿using NewShopApp.ViewModels.System.User;
+﻿using NewShopApp.ViewModels.Common;
+using NewShopApp.ViewModels.System.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,17 @@ namespace NewShopApp.Application.System.User
 {
     public interface IUserService
     {
-        Task<string> Authencate(LoginRequest request);
+        Task<ApiResult<string>> Authencate(LoginRequest request);
 
-        Task<bool> Register(RegisterRequest request);
+        Task<ApiResult<bool>> Register(RegisterRequest request);
+
+        Task<ApiResult<bool>> Update(Guid id,UserUpdateRequest request);
+
+        Task<ApiResult<PagedResult<UserVm>>> GetUserPaging(GetUserPagingRequest request);
+
+        Task<ApiResult<UserVm>> GetById(Guid id);
+        Task<ApiResult<bool>> Delete(Guid id);
+
+        Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
     }
 }

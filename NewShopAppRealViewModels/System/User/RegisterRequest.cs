@@ -1,28 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace NewShopApp.ViewModels.System.User
 {
    public  class RegisterRequest
     {
+        [Display(Name = "Tên")]
         public string FirstName { get; set; }
 
-        //[Display(Name = "Họ")]
+        [Display(Name = "Họ")]
         public string LastName { get; set; }
 
-        //[Display(Name = "Ngày sinh")]
-        //[DataType(DataType.Date)]
+        [Display(Name = "Ngày sinh")]
+        [DataType(DataType.Date)]
         public DateTime Dob { get; set; }
 
-        //[Display(Name = "Hòm thư")]
+        [Display(Name = "Hòm thư")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        //[Display(Name = "Số điện thoại")]
+        [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
-        public string UserName { get; set; }
 
+        [Display(Name = "Tên đăng nhập")]
+        public string UserName { get; set; }
+        [Display(Name = "Mật khẩu")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+        [Display(Name = "Xác nhận mật khẩu")]
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
     }
 }
