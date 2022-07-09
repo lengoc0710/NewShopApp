@@ -8,6 +8,6 @@ namespace NewShopApp.ViewModels.Common
     public class PagedResult<T> : PagedResultBase
     {
         public List<T> items { get; set; }
-        public int TotalRecord { get; set; }
+        //public int TotalRecords { get; set; }
     }
 }

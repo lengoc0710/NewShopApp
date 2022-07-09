@@ -17,7 +17,7 @@ namespace NewShopApp.Application.Catalog.Product
         Task<int> Update(ProductUpdateRequest request);
 
         Task<int> Delete(int productId);
-        Task<ProductViewModel> GetById(int productId, string languageID);
+        Task<ProductVm> GetById(int productId, string languageID);
 
         Task<bool> UpdatePrice (int productId, decimal newPrice );
         Task<bool> UpdateStock(int productId, int addedQuantity );
@@ -26,7 +26,7 @@ namespace NewShopApp.Application.Catalog.Product
 
 
      //   Task<List<ProductViewModel>> GetAll();
-        Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
+        Task<PagedResult<ProductVm>> GetPagings(GetManageProductPagingRequest request);
 
         Task<int> AddImage(int productId, ProductImageCreateRequest request );
 
@@ -37,7 +37,7 @@ namespace NewShopApp.Application.Catalog.Product
         Task<ProductImageViewModel> GetImageById(int imageId);
         Task<List<ProductImageViewModel>> GetListImages(int productId);
 
-        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageID, GetPublicProductPagingRequest request);
+        Task<PagedResult<ProductVm>> GetAllByCategoryId(string languageID, GetPublicProductPagingRequest request);
         //   Task<List<ProductViewModel>> GetAll(string languageID);
     
 

@@ -91,7 +91,7 @@ namespace NewShopAppTest.AdminApp.Services
             var users = JsonConvert.DeserializeObject<ApiSuccessResult<PagedResult<UserVm>>>(body);
             return users;
         }
-
+        
         public async Task<ApiResult<bool>> RegisterUser(RegisterRequest registerRequest)
         {
             var client = _httpClientFactory.CreateClient();
