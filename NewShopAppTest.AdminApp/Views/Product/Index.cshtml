@@ -1,9 +1,9 @@
 ﻿@using NewShopApp.ViewModels.Common;
-@model PagedResult<NewShopApp.ViewModels.System.User.UserVm>
+@model PagedResult<NewShopApp.ViewModels.Catalog.Product.ProductVm>
 
 @{
-     ViewData["Title"] = "User List";
-     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Product List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
     <script>
@@ -12,19 +12,17 @@
         }, 2000);
     </script>
 }
-<div class="container-fluid px-4">
-    <h1 class="mt-4">User List</h1>
+<div class="container-fluid">
+    <h1 class="mt-4">Product List</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/">Home Page</a></li>
-        <li class="breadcrumb-item active">User List</li>
+        <li class="breadcrumb-item active">Product List</li>
     </ol>
-
     <div class="card mb-4">
         <div class="card-header">
-
             <div class="row">
                 <div class="col-md-6 col-xs-12">
-                    <a class="btn btn-success" asp-action="Create" asp-controller="User"> New</a>
+                    <a class="btn btn-success" asp-action="Create" asp-controller="Product">New</a>
                 </div>
                 <div class="col-md-6 col-xs-12">
                     <form asp-action="Index" method="get">
@@ -32,17 +30,16 @@
                             <div class="col-md-8">
                                 <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
                             </div>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary">Find</button>
-                                <button type="button" onclick="window.location.href='/User/Index'" class="btn btn-dark">Reset</button>
-
+                            <div class="cold-md-4">
+                                <button type="submit" class="btn btn-primary"> Find</button>
+                                <button type="button" onclick="window.location.href='/Product/Index'" class="btn btn-dark">Reset</button>
                             </div>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
+
         <div class="card-body">
             <div class="row">
                 @if (ViewBag.SuccessMsg != null)
@@ -53,30 +50,25 @@
                 }
             </div>
             <div class="table-responsive">
-                <table class="table-bordered">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>
-                                Id
+                                ID
                             </th>
                             <th>
-                                FirstName
+                                Name
                             </th>
                             <th>
-                                LastName
+                                OriginalPrice
                             </th>
                             <th>
-                                PhoneNumber
+                                Price
                             </th>
                             <th>
-                                UserName
+                                Stock
                             </th>
-                            <th>
-                                Email
-                            </th>
-                            <th>
-                                Dob
-                            </th>
+
                             <th></th>
                         </tr>
                     </thead>
@@ -85,39 +77,32 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Id)
+                                    @Html.DisplayFor(modelItem => item.ID)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                    @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.LastName)
+                                    @Html.DisplayFor(modelItem => item.OriginalPrice)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    @Html.DisplayFor(modelItem => item.Price)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.UserName)
+                                    @Html.DisplayFor(modelItem => item.Stock)
                                 </td>
+
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Email)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Dob)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                                    @Html.ActionLink("RoleAssign", "RoleAssign", new { id = item.Id })
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-                </div>
-                @await Component.InvokeAsync("Pager", Model)
             </div>
+            @await Component.InvokeAsync("Pager", Model)
         </div>
     </div>
-
+</div>

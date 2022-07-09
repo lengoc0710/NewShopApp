@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
+using NewShopApp.Ultities.Constant;
 using NewShopApp.ViewModels.System.User;
 using NewShopAppTest.AdminApp.Services;
 using System;
@@ -54,7 +55,8 @@ namespace NewShopAppTest.AdminApp.Controllers
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                 IsPersistent = false
             };
-            HttpContext.Session.SetString("Token", result.ResultObj);
+            HttpContext.Session.SetString(SystemConstant.AppSettings.DefaultLanguageId, _configuration[SystemConstant.AppSettings.DefaultLanguageId]);
+            HttpContext.Session.SetString(SystemConstant.AppSettings.Token, result.ResultObj);
             await HttpContext.SignInAsync(
               CookieAuthenticationDefaults.AuthenticationScheme,
               userPrincipal,
@@ -69,7 +71,7 @@ namespace NewShopAppTest.AdminApp.Controllers
             SecurityToken validatedToken;
             TokenValidationParameters validationParameters = new TokenValidationParameters();
 
-            validationParameters.ValidateLifetime = true;
+            validationParameters.ValidateLifetime = true; 
 
             validationParameters.ValidAudience = _configuration["Tokens:Issuer"];
             validationParameters.ValidIssuer = _configuration["Tokens:Issuer"];
